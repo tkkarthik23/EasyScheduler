@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="{% static 'plugins/node-waves/waves.css' %}" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="{% static 'plugins/animate-css/animate.css' %}" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="{% static 'plugins/morrisjs/morris.css' %}" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="{% static 'css/themes/all-themes.css' %}" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+  <body class="theme-orange">
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="{% url 'index' %}">Scheduler - Dashboard</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{name}}</div>
+                    <div class="email">{{email}}</div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        </div>
+        <div class="body">
+          <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+              <div class="header">
+                  <h2>
+                      Add Task
+                  </h2>
+                  <ul class="header-dropdown m-r--5">
+                      <li class="dropdown">
+                          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                              <i class="material-icons">more_vert</i>
+                          </a>
+                          <ul class="dropdown-menu pull-right">
+                              <li><a href="javascript:void(0);">Action</a></li>
+                              <li><a href="javascript:void(0);">Another action</a></li>
+                              <li><a href="javascript:void(0);">Something else here</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+              <div class="body">
+                  <form action="{% url 'createTask' %}" method="GET">
+                    {% csrf_token %}
+                    <input type="text" name="sprintId" value="{{sprintID}}" hidden></input>
+                    <input type="text" name="startDate" value="{{startDate}}" hidden></input>
+                    <input type="text" name="endDate" value="{{endDate}}" hidden></input>
+                      <label for="email_address">Task Title</label>
+                      <div class="form-group">
+                          <div class="form-line">
+                              <input type="text" name="taskName" id="userName" class="form-control" placeholder="Enter task title">
+                          </div>
+                      </div>
+                      <label for="email_address">Task Description</label>
+                      <div class="form-group">
+                          <div class="form-line">
+                              <input type="text" name="desc" id="userName" class="form-control" placeholder="Enter task description">
+                          </div>
+                      </div>
+                                  <select name="points" required>
+                                        <option disabled selected>Choose Points</option>
+                                        <option value="1" {{disable1}}>1 Day - 1 Point</option>
+                                        <option value="2" {{disable2}}>2 Days - 2 Points</option>
+                                        <option value="3" {{disable3}}>3 Days - 3 Points</option>
+                                        <option value="7" {{disable4}}>1 Week - 7 Points</option>
+                                        <option value="14" {{disable5}}>Full Sprint - 14 Points</option>
+                                    </select>
+
+                                  </br>
+                                  </br>
+                                  <input type="date" name="needBy" id="datepicker" onchange="checkDateRange()" value="{{endDate}}" required>Need by</input>
+                      <!-- <select name="points" class="form-control">
+                            <option disabled selected>Choose Points</option>
+                            <option value="1" {{disable1}}>1 Day - 1 Point</option>
+                            <option value="2" {{disable2}}>2 Days - 2 Points</option>
+                            <option value="3" {{disable3}}>3 Days - 3 Points</option>
+                            <option value="5" {{disable4}}>1 Week - 5 Points</option>
+                            <option value="10" {{disable5}}>Full Sprint - 10 Points</option>
+                      </select> -->
+</br>
+</br>
+</br>
+<select name="priority" required>
+      <option disabled selected>Choose priority</option>
+      <option value="1">Low</option>
+      <option value="2">Medium</option>
+      <option value="3">High</option>
+</select>
+
+                      <br>
+                      <button type="submit" onchange="checkDateRange()" class="btn btn-primary m-t-15 waves-effect" {{disableButton}}>Add task to sprint(If disabled no capacity left)</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+        </div>
+    </section>
+    <script>
+        function checkDateRange() {
+            var selectedDate = new Date(document.getElementById("datepicker").value);
+            var startDate = new Date("{{startDate}}");
+            var endDate = new Date("{{endDate}}");
+            if (selectedDate >= startDate && selectedDate <= endDate) {
+            } else {
+                var selectedDate = document.getElementById("datepicker");
+                selectedDate.value = new Date("{{endDate}}");
+                alert("Selected date is outside the sprint range. Please select need by date between {{startDate}} and {{endDate}}");
+            }
+        }
+    </script>
+    <!-- Jquery Core Js -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.js' %}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="{% static 'plugins/node-waves/waves.js' %}"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="{% static 'plugins/jquery-countto/jquery.countTo.js' %}"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'plugins/morrisjs/morris.js' %}"></script>
+
+    <!-- ChartJs -->
+    <script src="{% static 'plugins/chartjs/Chart.bundle.js' %}"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="{% static 'plugins/flot-charts/jquery.flot.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'plugins/flot-charts/jquery.flot.time.js' %}"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="{% static 'plugins/jquery-sparkline/jquery.sparkline.js' %}"></script>
+
+    <!-- Custom Js -->
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/pages/index.js' %}"></script>
+
+    <!-- Demo Js -->
+    <script src="{% static 'js/demo.js' %}"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form class="" action="{% url 'createTask' %}" method="GET">
+      {% csrf_token %}
+      <input type="text" name="sprintId" value="{{sprintID}}" hidden></input>
+      <input type="text" name="startDate" value="{{startDate}}" hidden></input>
+      <input type="text" name="endDate" value="{{endDate}}" hidden></input>
+      <input type="text" name="taskName" required>Task Name</input>
+      </br>
+      </br>
+      <input type="text" name="desc" required>Task Description</input>
+      </br>
+      </br>
+      <select name="points">
+            <option disabled selected>Choose Points</option>
+            <option value="1" {{disable1}}>1 Day - 1 Point</option>
+            <option value="2" {{disable2}}>2 Days - 2 Points</option>
+            <option value="3" {{disable3}}>3 Days - 3 Points</option>
+            <option value="5" {{disable4}}>1 Week - 5 Points</option>
+            <option value="10" {{disable5}}>Full Sprint - 10 Points</option>
+      </select>
+      </br>
+      </br>
+      <input type="date" name="needBy" id="datepicker" onchange="checkDateRange()" value="{{endDate}}" required>Need by</input>
+      </br>
+      </br>
+      <select name="priority">
+            <option disabled selected>Choose priority</option>
+            <option value="1">high</option>
+            <option value="2">medium</option>
+            <option value="3">low</option>
+      </select>
+      </br>
+      </br>
+      <button type="submit" onchange="checkDateRange()" name="button">Click here to add Task</button>
+    </form>
+    <script>
+        function checkDateRange() {
+            var selectedDate = new Date(document.getElementById("datepicker").value);
+            var startDate = new Date("{{startDate}}");
+            var endDate = new Date("{{endDate}}");
+            if (selectedDate >= startDate && selectedDate <= endDate) {
+            } else {
+                var selectedDate = document.getElementById("datepicker");
+                selectedDate.value = new Date("{{endDate}}");
+                alert("Selected date is outside the sprint range. Please select need by date between {{startDate}} and {{endDate}}");
+            }
+        }
+    </script>
+  </body>
+
+</html> -->
